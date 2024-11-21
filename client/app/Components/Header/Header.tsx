@@ -48,7 +48,7 @@ function Header() {
             if (userId) {
               openModalForAdd();
             } else {
-              router.push("/login");
+              router.replace("/login");
             }
           }}
         >
