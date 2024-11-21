@@ -2,6 +2,7 @@
 
 import { TrendingUp } from "lucide-react";
 import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
+import { useTasks } from "@/context/taskContext";
 
 import {
   Card,
@@ -30,11 +31,13 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function RadialChart() {
-  const tasksTotal = 100;
+  const { tasks, completedTasks, activeTasks } = useTasks();
+  const tasksTotal = tasks.length;
+
   const chartData = [
     {
-      pending: 80,
-      completed: 20,
+      pending: activeTasks.length,
+      completed: completedTasks.length,
     },
   ];
 

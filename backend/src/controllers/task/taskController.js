@@ -31,6 +31,8 @@ export const createTask = asyncHandler(async (req, res) => {
     }
 });
 
+
+
 export const getTasks = asyncHandler(async (req, res) => {
     try {
         const userId = req.user._id;
@@ -50,6 +52,8 @@ export const getTasks = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
 
 export const getTask = asyncHandler(async (req, res) => {
     try {
@@ -77,6 +81,8 @@ export const getTask = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
 
 export const updateTask = asyncHandler(async (req, res) => {
     try {
@@ -118,6 +124,7 @@ export const updateTask = asyncHandler(async (req, res) => {
     }
 });
 
+
 export const deleteTask = asyncHandler(async (req, res) => {
     try {
         const userId = req.user._id;
@@ -142,6 +149,7 @@ export const deleteTask = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 /// Nuclear option for deleting all tasks
 export const deleteAllTasks = asyncHandler(async (req, res) => {

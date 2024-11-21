@@ -1,12 +1,19 @@
 "use client";
-
-import React from "react";
+import { useTasks } from "@/context/taskContext";
 import { useUserContext } from "@/context/userContext";
 import { github, moon, profile } from "@/utils/Icons";
 import Link from "next/link";
-const Header = () => {
+import { useRouter } from "next/navigation";
+import React from "react";
+
+function Header() {
   const { user } = useUserContext();
+  const { openModalForAdd, activeTasks } = useTasks();
+
+  const router = useRouter();
+
   const { name } = user;
+
   const userId = user._id;
 
   return (
@@ -16,16 +23,19 @@ const Header = () => {
           <span role="img" aria-label="wave">
             👋
           </span>
-          {userId ? `Welcome, ${name}` : "Welcome to Taskly!"}
+          {userId ? `Welcome, ${name}!` : "Welcome to Taskfyer"}
         </h1>
         <p className="text-sm">
           {userId ? (
             <>
-              You have <span className="font-bold text-[#3aafae]">5</span>
+              You have{" "}
+              <span className="font-bold text-[#3aafae]">
+                {activeTasks.length}
+              </span>
               &nbsp;active tasks
             </>
           ) : (
-            "Please login or register to view your tasks."
+            "Please login or register to view your tasks"
           )}
         </p>
       </div>
@@ -33,12 +43,20 @@ const Header = () => {
         <button
           className="px-8 py-3 bg-[#3aafae] text-white rounded-[50px]
           hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out"
+          onClick={() => {
+            if (userId) {
+              openModalForAdd();
+            } else {
+              router.push("/login");
+            }
+          }}
         >
-          Create a new task
+          {userId ? "Add a new Task" : "Login / Register"}
         </button>
+
         <div className="flex gap-4 items-center">
           <Link
-            href="https://github.com/AlaaAsaad03/Taskly"
+            href="https://github.com/Maclinz/taskfyer"
             passHref
             target="_blank"
             rel="noopener noreferrer"
@@ -47,7 +65,7 @@ const Header = () => {
             {github}
           </Link>
           <Link
-            href="https://github.com/AlaaAsaad03/Taskly"
+            href="https://github.com/Maclinz/taskfyer"
             passHref
             target="_blank"
             rel="noopener noreferrer"
@@ -56,18 +74,18 @@ const Header = () => {
             {moon}
           </Link>
           <Link
-            href="https://github.com/AlaaAsaad03/Taskly"
+            href="https://github.com/Maclinz/taskfyer"
             passHref
             target="_blank"
             rel="noopener noreferrer"
             className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
           >
             {profile}
-          </Link>{" "}
+          </Link>
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;

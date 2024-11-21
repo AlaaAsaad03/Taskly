@@ -4,7 +4,6 @@ import IconDeleteAll from "@/public/icons/IconDeleteAll";
 import IconFileCheck from "@/public/icons/IconFileCheck";
 import IconGrid from "@/public/icons/IconGrid";
 import IconStopwatch from "@/public/icons/IconStopwatch";
-import { link } from "fs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,11 +41,11 @@ function MiniSidebar() {
   return (
     <div className="basis-[5rem] flex flex-col bg-[#f9f9f9]">
       <div className="flex items-center justify-center h-[5rem]">
-        <Image src="/logo.png" width={28} height={28} alt="logo" />
+        <Image src="/TasklyLogo.png" width={28} height={28} alt="logo" />
       </div>
+
       <div className="mt-8 flex-1 flex flex-col items-center justify-between">
         <ul className="flex flex-col gap-10">
-          {" "}
           {navItems.map((item, index) => (
             <li key={index} className="relative group">
               <Link href={item.link}>{item.icon}</Link>
@@ -58,6 +57,7 @@ function MiniSidebar() {
             </li>
           ))}
         </ul>
+
         <div className="mb-[1.5rem]">
           <button className="w-12 h-12 flex justify-center items-center border-2 border-[#EB4E31]  p-2 rounded-full">
             <IconDeleteAll strokeColor="#EB4E31" />

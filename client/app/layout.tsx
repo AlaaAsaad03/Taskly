@@ -5,8 +5,8 @@ import { Toaster } from "react-hot-toast";
 import UserProvider from "@/providers/UserProvider";
 import SidebarProvider from "@/providers/SidebarProvider";
 import MainLayout from "@/providers/MainLayout";
-import MiniSidebar from "./Components/auth/MiniSidebar/MiniSidebar";
-import Header from "./Components/auth/Header/Header";
+import MiniSidebar from "./Components/MiniSidebar/MiniSidebar";
+import Header from "./Components/Header/Header";
 import MainContentLayout from "@/providers/MainContentLayout";
 
 const inter = Inter({
