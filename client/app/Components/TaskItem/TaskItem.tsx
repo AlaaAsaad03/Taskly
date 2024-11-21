@@ -28,45 +28,59 @@ function TaskItem({ task }: TaskItemProps) {
 
   return (
     <motion.div
-      className="h-[16rem] px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#f9f9f9] rounded-lg border-2 border-white"
+      className="px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#f9f9f9] rounded-lg border-2 border-white
+                 h-[16rem] sm:h-auto lg:h-[18rem]"
       variants={item}
     >
       <div>
-        <h4 className="font-bold text-2xl">{task.title}</h4>
-        <p>{task.description}</p>
+        <h4 className="font-bold text-xl sm:text-2xl lg:text-3xl truncate">
+          {task.title}
+        </h4>
+        <p className="text-sm sm:text-base lg:text-lg text-gray-600">
+          {task.description}
+        </p>
       </div>
-      <div className="mt-auto flex justify-between items-center">
-        <p className="text-sm text-gray-400">{formatTime(task.createdAt)}</p>
-        <p className={`text-sm font-bold ${getPriorityColor(task.priority)}`}>
+      <div className="mt-auto flex flex-wrap justify-between items-center gap-2">
+        <p className="text-xs sm:text-sm lg:text-base text-gray-400">
+          {formatTime(task.createdAt)}
+        </p>
+        <p
+          className={`text-xs sm:text-sm lg:text-base font-bold ${getPriorityColor(
+            task.priority
+          )}`}
+        >
           {task.priority}
         </p>
-        <div>
-          <div className="flex items-center gap-3 text-gray-400 text-[1.2rem]">
-            <button
-              className={`${
-                task.completed ? "text-yellow-400" : "text-gray-400"
-              }`}
-            >
-              {star}
-            </button>
-            <button
-              className="text-[#00A1F1]"
-              onClick={() => {
-                getTask(task._id);
-                openModalForEdit(task);
-              }}
-            >
-              {edit}
-            </button>
-            <button
-              className="text-[#F65314]"
-              onClick={() => {
-                deleteTask(task._id);
-              }}
-            >
-              {trash}
-            </button>
-          </div>
+        <div className="flex items-center gap-2 sm:gap-3 text-gray-400 text-[1.2rem]">
+          <button
+            aria-label={`Mark as ${
+              task.completed ? "not completed" : "completed"
+            }`}
+            className={`${
+              task.completed ? "text-yellow-400" : "text-gray-400"
+            }`}
+          >
+            {star}
+          </button>
+          <button
+            aria-label="Edit task"
+            className="text-[#00A1F1]"
+            onClick={() => {
+              getTask(task._id);
+              openModalForEdit(task);
+            }}
+          >
+            {edit}
+          </button>
+          <button
+            aria-label="Delete task"
+            className="text-[#F65314]"
+            onClick={() => {
+              deleteTask(task._id);
+            }}
+          >
+            {trash}
+          </button>
         </div>
       </div>
     </motion.div>

@@ -30,7 +30,6 @@ function Profile() {
           </h1>
         </div>
       </div>
-
       <div className="mt-6 flex flex-col gap-8">
         <div className="grid grid-cols-2 gap-4">
           <div className="text-gray-400">
@@ -71,7 +70,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <h3 className="mt-8 font-medium">Activity</h3>
+      <h3 className=" mt-8 text-lg font-semibold text-gray-700">Activity</h3>
     </div>
   );
 }

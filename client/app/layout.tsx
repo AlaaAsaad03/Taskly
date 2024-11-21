@@ -34,14 +34,16 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} h-screen flex flex-col`}>
         <UserProvider>
           <Toaster position="top-center" />
-          <div className="h-full flex overflow-hidden">
+          <div className="flex flex-grow overflow-hidden">
             <MiniSidebar />
             <div className="flex-1 flex flex-col">
               <Header />
-              <MainContentLayout>
+              <MainContentLayout className="flex-1 overflow-auto">
+                {" "}
+                {/* Added className here */}
                 <MainLayout>{children}</MainLayout>
                 <SidebarProvider />
               </MainContentLayout>

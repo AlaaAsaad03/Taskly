@@ -13,7 +13,6 @@ export default function Home() {
   useRedirect("/login");
 
   const { tasks, openModalForAdd, priority, setPriority } = useTasks();
-
   const filtered = filteredTasks(tasks, priority);
 
   useEffect(() => {
@@ -21,30 +20,40 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="m-6 h-full">
-      <div className="flex justify-between">
+    <main className="m-6 h-full flex flex-col">
+      <div className="flex flex-col md:flex-row justify-between">
         <h1 className="text-2xl font-bold">All Tasks</h1>
         <Filters />
       </div>
 
-      <motion.div
-        className="pb-[2rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]"
-        variants={container}
-        initial="hidden"
-        animate="visible"
-      >
-        {filtered.map((task: Task, i: number) => (
-          <TaskItem key={i} task={task} />
-        ))}
-        <motion.button
-          className="h-[16rem] w-full py-2 rounded-md text-lg font-medium text-gray-500 border-dashed border-2 border-gray-400
-          hover:bg-gray-300 hover:border-none transition duration-200 ease-in-out"
-          onClick={openModalForAdd}
-          variants={item}
+      {/* Scrollable container */}
+      <div className="flex-1 h-[calc(100vh-4rem)] overflow-y-auto p-4">
+        <motion.div
+          className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          variants={container}
+          initial="hidden"
+          animate="visible"
         >
-          Add New Task
-        </motion.button>
-      </motion.div>
+          {filtered.map((task: Task, i: number) => (
+            <TaskItem key={i} task={task} />
+          ))}
+
+          {/* Add New Task Button */}
+          <motion.button
+            className="h-[16rem] sm:h-auto lg:h-[18rem] px-6 py-4 flex flex-col justify-center items-center gap-6 shadow-lg bg-gradient-to-r from-[#00A1F1] to-[#3aafae] rounded-lg border-2 border-transparent
+            hover:bg-gradient-to-r hover:from-[#3aafae] hover:to-[#00A1F1] text-white transition-all duration-300 ease-in-out"
+            onClick={openModalForAdd}
+            variants={item}
+          >
+            <h4 className="font-semibold text-2xl sm:text-3xl lg:text-4xl text-center">
+              Add New Task
+            </h4>
+            <p className="text-sm sm:text-base lg:text-lg text-center">
+              Start tracking your tasks now.
+            </p>
+          </motion.button>
+        </motion.div>
+      </div>
     </main>
   );
 }
